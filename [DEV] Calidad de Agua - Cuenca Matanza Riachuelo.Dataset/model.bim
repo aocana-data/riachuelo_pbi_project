@@ -2191,7 +2191,7 @@
             ]
           },
           {
-            "name": "dataset",
+            "name": "lugar_muestra",
             "annotations": [
               {
                 "name": "SummarizationSetBy",
@@ -2200,7 +2200,7 @@
             ],
             "dataType": "string",
             "lineageTag": "27d2cd48-260a-41d0-98d0-3bfcb6d4dbc4",
-            "sourceColumn": "dataset",
+            "sourceColumn": "lugar_muestra",
             "summarizeBy": "none"
           },
           {
@@ -2952,9 +2952,10 @@
                 "let",
                 "    Source = Csv.Document(Web.Contents(merged_data),[Delimiter=\",\", Columns=57, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
                 "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
-                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"fecha_muestra\", type date}, {\"dataset\", type text}, {\"aspecto\", type text}, {\"ph_a_25_c\", Int64.Type}, {\"conductividad_a_25c\", Int64.Type}, {\"temperatura\", Int64.Type}, {\"oxigeno\", Int64.Type}, {\"turbidez\", Int64.Type}, {\"nitritos\", Int64.Type}, {\"nitrogeno_amoniacal\", Int64.Type}, {\"nitratos\", type text}, {\"solidos_totales\", Int64.Type}, {\"solidos_fijos\", Int64.Type}, {\"solidos_volátiles\", Int64.Type}, {\"dureza\", Int64.Type}, {\"alcalinidad_total\", Int64.Type}, {\"cloruros\", Int64.Type}, {\"salinidad\", type text}, {\"solidos_disueltos_totales\", type text}, {\"solidos_sedimentables_1_hs\", type text}, {\"solidos_suspendidos\", type text}, {\"dqo\", type text}, {\"dbo5\", type text}, {\"fosforo_total\", Int64.Type}, {\"detergentes\", type text}, {\"sulfuros\", type text}, {\"sulfatos\", Int64.Type}, {\"sustancias_fenolicas\", type text}, {\"aluminio\", type text}, {\"benceno\", Int64.Type}, {\"tolueno\", Int64.Type}, {\"etil-benceno\", Int64.Type}, {\"m_p-xileno\", Int64.Type}, {\"o-xileno\", Int64.Type}, {\"hidrocarburos_totales\", type text}, {\"aceites_y_grasas\", type text}, {\"de_sat_de_od\", Int64.Type}, {\"niquel_total\", type text}, {\"cobre_total\", type text}, {\"zinc_total\", type text}, {\"hierro_total\", Int64.Type}, {\"manganeso_total\", Int64.Type}, {\"cobalto_total\", type text}, {\"cromo_total\", type text}, {\"arsenico_total\", type text}, {\"plomo_total\", type text}, {\"cadmio_total\", type text}, {\"plata_total\", type text}, {\"mercurio_total\", type text}, {\"bacterias_aerobias_mesofilas\", type text}, {\"coliformes_totales\", type text}, {\"coliformes_fecales\", type text}, {\"coliformes_no_fecales_35c\", type text}, {\"escherichia_coli\", type text}, {\"pseudomonas_aeruginosa\", type text}, {\"estreptococos_fecales\", type text}, {\"enterococos\", type text}})",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"fecha_muestra\", type date}, {\"dataset\", type text}, {\"aspecto\", type text}, {\"ph_a_25_c\", Int64.Type}, {\"conductividad_a_25c\", Int64.Type}, {\"temperatura\", Int64.Type}, {\"oxigeno\", Int64.Type}, {\"turbidez\", Int64.Type}, {\"nitritos\", Int64.Type}, {\"nitrogeno_amoniacal\", Int64.Type}, {\"nitratos\", type text}, {\"solidos_totales\", Int64.Type}, {\"solidos_fijos\", Int64.Type}, {\"solidos_volátiles\", Int64.Type}, {\"dureza\", Int64.Type}, {\"alcalinidad_total\", Int64.Type}, {\"cloruros\", Int64.Type}, {\"salinidad\", type text}, {\"solidos_disueltos_totales\", type text}, {\"solidos_sedimentables_1_hs\", type text}, {\"solidos_suspendidos\", type text}, {\"dqo\", type text}, {\"dbo5\", type text}, {\"fosforo_total\", Int64.Type}, {\"detergentes\", type text}, {\"sulfuros\", type text}, {\"sulfatos\", Int64.Type}, {\"sustancias_fenolicas\", type text}, {\"aluminio\", type text}, {\"benceno\", Int64.Type}, {\"tolueno\", Int64.Type}, {\"etil-benceno\", Int64.Type}, {\"m_p-xileno\", Int64.Type}, {\"o-xileno\", Int64.Type}, {\"hidrocarburos_totales\", type text}, {\"aceites_y_grasas\", type text}, {\"de_sat_de_od\", Int64.Type}, {\"niquel_total\", type text}, {\"cobre_total\", type text}, {\"zinc_total\", type text}, {\"hierro_total\", Int64.Type}, {\"manganeso_total\", Int64.Type}, {\"cobalto_total\", type text}, {\"cromo_total\", type text}, {\"arsenico_total\", type text}, {\"plomo_total\", type text}, {\"cadmio_total\", type text}, {\"plata_total\", type text}, {\"mercurio_total\", type text}, {\"bacterias_aerobias_mesofilas\", type text}, {\"coliformes_totales\", type text}, {\"coliformes_fecales\", type text}, {\"coliformes_no_fecales_35c\", type text}, {\"escherichia_coli\", type text}, {\"pseudomonas_aeruginosa\", type text}, {\"estreptococos_fecales\", type text}, {\"enterococos\", type text}}),",
+                "    #\"Renamed Columns\" = Table.RenameColumns(#\"Changed Type\",{{\"dataset\", \"lugar_muestra\"}})",
                 "in",
-                "    #\"Changed Type\""
+                "    #\"Renamed Columns\""
               ],
               "type": "m"
             }
