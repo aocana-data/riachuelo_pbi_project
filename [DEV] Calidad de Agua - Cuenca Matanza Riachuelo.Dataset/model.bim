@@ -4,7 +4,7 @@
     "annotations": [
       {
         "name": "PBI_QueryOrder",
-        "value": "[\"Sheet1\"]"
+        "value": "[\"Sheet1\",\"apra_merged_data\",\"Errors in pub?gid=1359234623&single=true&output=csv\",\"merged_data\"]"
       },
       {
         "name": "__PBI_TimeIntelligenceEnabled",
@@ -38,6 +38,66 @@
       "returnErrorValuesAsNull": true
     },
     "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "expressions": [
+      {
+        "name": "Errors in pub?gid=1359234623&single=true&output=csv",
+        "annotations": [
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          },
+          {
+            "name": "PBI_ResultType",
+            "value": "Exception"
+          }
+        ],
+        "expression": [
+          "let",
+          "Source = apra_merged_data,",
+          "  #\"Detected Type Mismatches\" = let",
+          "    tableWithOnlyPrimitiveTypes = Table.SelectColumns(Source, Table.ColumnsOfType(Source, {type nullable number, type nullable text, type nullable logical, type nullable date, type nullable datetime, type nullable datetimezone, type nullable time, type nullable duration})),",
+          "    recordTypeFields = Type.RecordFields(Type.TableRow(Value.Type(tableWithOnlyPrimitiveTypes))),",
+          "    fieldNames = Record.FieldNames(recordTypeFields),",
+          "    fieldTypes = List.Transform(Record.ToList(recordTypeFields), each [Type]),",
+          "    pairs = List.Transform(List.Positions(fieldNames), (i) => {fieldNames{i}, (v) => if v = null or Value.Is(v, fieldTypes{i}) then v else error [Message = \"The type of the value does not match the type of the column.\", Detail = v], fieldTypes{i}})",
+          "in",
+          "    Table.TransformColumns(Source, pairs),",
+          "  #\"Added Index\" = Table.AddIndexColumn(#\"Detected Type Mismatches\", \"Row Number\" ,1),",
+          "  #\"Kept Errors\" = Table.SelectRowsWithErrors(#\"Added Index\", {\"fecha_muestra\", \"dataset\", \"aspecto\", \"ph_a_25_c\", \"conductividad_a_25c\", \"temperatura\", \"oxigeno\", \"turbidez\", \"nitritos\", \"nitrogeno_amoniacal\", \"nitratos\", \"solidos_totales\", \"solidos_fijos\", \"solidos_volátiles\", \"dureza\", \"alcalinidad_total\", \"cloruros\", \"salinidad\", \"solidos_disueltos_totales\", \"solidos_sedimentables_1_hs\", \"solidos_suspendidos\", \"dqo\", \"dbo5\", \"fosforo_total\", \"detergentes\", \"sulfuros\", \"sulfatos\", \"sustancias_fenolicas\", \"aluminio\", \"benceno\", \"tolueno\", \"etil-benceno\", \"m_p-xileno\", \"o-xileno\", \"hidrocarburos_totales\", \"aceites_y_grasas\", \"de_sat_de_od\", \"niquel_total\", \"cobre_total\", \"zinc_total\", \"hierro_total\", \"manganeso_total\", \"cobalto_total\", \"cromo_total\", \"arsenico_total\", \"plomo_total\", \"cadmio_total\", \"plata_total\", \"mercurio_total\", \"bacterias_aerobias_mesofilas\", \"coliformes_totales\", \"coliformes_fecales\", \"coliformes_no_fecales_35c\", \"escherichia_coli\", \"pseudomonas_aeruginosa\", \"estreptococos_fecales\", \"enterococos\"}),",
+          "  #\"Reordered Columns\" = Table.ReorderColumns(#\"Kept Errors\", {\"Row Number\", \"fecha_muestra\", \"dataset\", \"aspecto\", \"ph_a_25_c\", \"conductividad_a_25c\", \"temperatura\", \"oxigeno\", \"turbidez\", \"nitritos\", \"nitrogeno_amoniacal\", \"nitratos\", \"solidos_totales\", \"solidos_fijos\", \"solidos_volátiles\", \"dureza\", \"alcalinidad_total\", \"cloruros\", \"salinidad\", \"solidos_disueltos_totales\", \"solidos_sedimentables_1_hs\", \"solidos_suspendidos\", \"dqo\", \"dbo5\", \"fosforo_total\", \"detergentes\", \"sulfuros\", \"sulfatos\", \"sustancias_fenolicas\", \"aluminio\", \"benceno\", \"tolueno\", \"etil-benceno\", \"m_p-xileno\", \"o-xileno\", \"hidrocarburos_totales\", \"aceites_y_grasas\", \"de_sat_de_od\", \"niquel_total\", \"cobre_total\", \"zinc_total\", \"hierro_total\", \"manganeso_total\", \"cobalto_total\", \"cromo_total\", \"arsenico_total\", \"plomo_total\", \"cadmio_total\", \"plata_total\", \"mercurio_total\", \"bacterias_aerobias_mesofilas\", \"coliformes_totales\", \"coliformes_fecales\", \"coliformes_no_fecales_35c\", \"escherichia_coli\", \"pseudomonas_aeruginosa\", \"estreptococos_fecales\", \"enterococos\"}),",
+          "    #\"m_p-xileno\" = #\"Reordered Columns\"{23}[#\"m_p-xileno\"]",
+          "in",
+          "  #\"m_p-xileno\""
+        ],
+        "kind": "m",
+        "lineageTag": "8a8aa886-c1b4-4266-b6fe-28db80d51d93",
+        "queryGroup": "Query Errors - 11/1/2023 12:40:00 PM"
+      },
+      {
+        "name": "merged_data",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Text"
+          }
+        ],
+        "expression": "\"https://docs.google.com/spreadsheets/d/e/2PACX-1vQEWkH0GbpcmjYtGCLwl4RbikRGBM82DToLQ4uVEefFon8S5qMRd7Qo-bC_SYBsTNZ5wwvcF54bhUNh/pub?gid=1359234623&single=true&output=csv\" meta [IsParameterQuery=true, Type=\"Any\", IsParameterQueryRequired=true]",
+        "kind": "m",
+        "lineageTag": "6892baaf-8837-4d45-9a93-1604520fa979"
+      }
+    ],
+    "queryGroups": [
+      {
+        "annotations": [
+          {
+            "name": "PBI_QueryGroupOrder",
+            "value": "0"
+          }
+        ],
+        "description": "Errors in queries that were loaded on 11/1/2023 12:40:00 PM.",
+        "folder": "Query Errors - 11/1/2023 12:40:00 PM"
+      }
+    ],
     "relationships": [
       {
         "name": "07d96e4d-2789-4067-aeb7-7f93645d35f0",
@@ -54,6 +114,14 @@
         "joinOnDateBehavior": "datePartOnly",
         "toColumn": "Date",
         "toTable": "LocalDateTable_f206bbdb-19bb-4112-a6db-47ca132f3787"
+      },
+      {
+        "name": "7a238708-575d-404e-945f-67dbcf79bf9b",
+        "fromColumn": "fecha_muestra",
+        "fromTable": "apra_merged_data",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_2e4879b3-fbc4-4556-b7d0-401b17a4bb9a"
       }
     ],
     "sourceQueryCulture": "es-AR",
@@ -2074,6 +2142,1020 @@
             "mode": "import",
             "source": {
               "expression": "Calendar(Date(Year(MIN('Calendario'[Date])), 1, 1), Date(Year(MAX('Calendario'[Date])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      },
+      {
+        "name": "apra_merged_data",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navigation"
+          }
+        ],
+        "columns": [
+          {
+            "name": "fecha_muestra",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "Long Date",
+            "lineageTag": "55a4961d-0ffa-478e-85fc-8c49cc8b8e34",
+            "sourceColumn": "fecha_muestra",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_2e4879b3-fbc4-4556-b7d0-401b17a4bb9a"
+                },
+                "isDefault": true,
+                "relationship": "7a238708-575d-404e-945f-67dbcf79bf9b"
+              }
+            ]
+          },
+          {
+            "name": "dataset",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "27d2cd48-260a-41d0-98d0-3bfcb6d4dbc4",
+            "sourceColumn": "dataset",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "aspecto",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "72d2db9f-7c62-465c-99bb-920b25f623a4",
+            "sourceColumn": "aspecto",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "ph_a_25_c",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "09843d46-080f-4b57-a601-5b867ee4b260",
+            "sourceColumn": "ph_a_25_c",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "conductividad_a_25c",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "daf2ad58-f45e-457d-9452-3162bbbcae8e",
+            "sourceColumn": "conductividad_a_25c",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "temperatura",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b2cb4c57-6178-4dd0-9b3a-622e1aff7ddf",
+            "sourceColumn": "temperatura",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "oxigeno",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "92fc5953-5d0d-4061-8948-ac3eaf706a33",
+            "sourceColumn": "oxigeno",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "turbidez",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "febfcf36-600a-40e3-880c-b15e1520e5c0",
+            "sourceColumn": "turbidez",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "nitritos",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c0fcd5c9-1871-4430-a41f-47d702e6f4f5",
+            "sourceColumn": "nitritos",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "nitrogeno_amoniacal",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "194a2fcb-f0fc-447a-8b02-258ef28f2678",
+            "sourceColumn": "nitrogeno_amoniacal",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "nitratos",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a7df9543-cfe1-4ffb-87df-00a89cc3803c",
+            "sourceColumn": "nitratos",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "solidos_totales",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "bf0adb4a-9331-4138-87fb-5981e61f4958",
+            "sourceColumn": "solidos_totales",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "solidos_fijos",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e8eee5f3-fc6b-44a7-97f3-61036c154cb0",
+            "sourceColumn": "solidos_fijos",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "solidos_volátiles",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "b5625a11-8975-45d9-af8b-4f9a836a9f1e",
+            "sourceColumn": "solidos_volátiles",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "dureza",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "3ab86e11-68aa-4b39-bbd7-d285ce6d6c99",
+            "sourceColumn": "dureza",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "alcalinidad_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "78853dec-12aa-4e5d-9d07-841382ca2074",
+            "sourceColumn": "alcalinidad_total",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "cloruros",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "785b81cf-f6c8-4504-8635-af04afe79dc0",
+            "sourceColumn": "cloruros",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "salinidad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "a3825d83-6303-46d7-8535-72708fb41a83",
+            "sourceColumn": "salinidad",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "solidos_disueltos_totales",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d5877c5f-8431-4c50-b407-8ebd451aa5fe",
+            "sourceColumn": "solidos_disueltos_totales",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "solidos_sedimentables_1_hs",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7c122fb7-bbf7-4dcb-b75f-dfedc4a1fac4",
+            "sourceColumn": "solidos_sedimentables_1_hs",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "solidos_suspendidos",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "520462d2-cc75-43f8-8f22-0fbb886cb82e",
+            "sourceColumn": "solidos_suspendidos",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "dqo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7f75fae8-b779-49f8-931e-2771ffe7c98a",
+            "sourceColumn": "dqo",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "dbo5",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "bc263ef0-9410-467e-b6a7-f1e6b767dca4",
+            "sourceColumn": "dbo5",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "fosforo_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "e6ba01c8-8075-41a0-8130-28ae500f48a3",
+            "sourceColumn": "fosforo_total",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "detergentes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "96b0b41d-f08e-4eeb-9af1-0924f52ca8f7",
+            "sourceColumn": "detergentes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "sulfuros",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "48528ced-c8d5-4501-b5ae-5fa20cf82326",
+            "sourceColumn": "sulfuros",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "sulfatos",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "acb0d747-05f9-429b-8309-15e2cbc1bdf9",
+            "sourceColumn": "sulfatos",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "sustancias_fenolicas",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d9d241e5-b072-4baa-89ad-9f2de54aa3cb",
+            "sourceColumn": "sustancias_fenolicas",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "aluminio",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "2ee29293-399b-4f58-ac2c-58d69c98884e",
+            "sourceColumn": "aluminio",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "benceno",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "7a326cbb-cef3-4765-a694-31d2ab5d27d6",
+            "sourceColumn": "benceno",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "tolueno",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "c3285cce-dcd3-48ac-969f-012f34d3cb41",
+            "sourceColumn": "tolueno",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "etil-benceno",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "24ca59c7-b924-4de5-a6bc-a82698c9e554",
+            "sourceColumn": "etil-benceno",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "m_p-xileno",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "73627814-0c77-4232-a4e7-55476919a1a3",
+            "sourceColumn": "m_p-xileno",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "o-xileno",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "3bd04532-99a1-4c4e-996f-5b1dad4d4de8",
+            "sourceColumn": "o-xileno",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "hidrocarburos_totales",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "013e863a-3d30-4385-8a57-695f041ffe0d",
+            "sourceColumn": "hidrocarburos_totales",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "aceites_y_grasas",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c08ad0b4-5126-4614-a575-893df04346fc",
+            "sourceColumn": "aceites_y_grasas",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "de_sat_de_od",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "93ad589a-497f-425e-9552-e81ed8bab82b",
+            "sourceColumn": "de_sat_de_od",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "niquel_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d66716cb-6622-427e-b6bb-1c692f8e155c",
+            "sourceColumn": "niquel_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "cobre_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "1ddaf14a-9820-408a-a3f5-f369d7dc4cb2",
+            "sourceColumn": "cobre_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "zinc_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d34d89a9-9739-4a07-b0ea-6b23c53989d6",
+            "sourceColumn": "zinc_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "hierro_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9b55dd25-3e00-4377-a1d6-a1748f706622",
+            "sourceColumn": "hierro_total",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "manganeso_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "89493c71-8495-4715-bfe3-1f85b59d8318",
+            "sourceColumn": "manganeso_total",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "cobalto_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "24f26b46-46e7-45cf-a5b5-078093dea503",
+            "sourceColumn": "cobalto_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "cromo_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c668515e-9aaa-4277-8f11-b17ddba0115e",
+            "sourceColumn": "cromo_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "arsenico_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "106610df-f6ee-4c5a-9f3c-73472f012618",
+            "sourceColumn": "arsenico_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "plomo_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7b2a4b1f-8e7a-4883-8f3b-7851acdcf41e",
+            "sourceColumn": "plomo_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "cadmio_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6b718f0e-2836-4e1d-91c3-1c7d6fc2cf86",
+            "sourceColumn": "cadmio_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "plata_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "54599a7e-8ffc-412e-ae73-8c3b86b677bc",
+            "sourceColumn": "plata_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "mercurio_total",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "f74fa0d1-b381-4864-a809-8d946afcd555",
+            "sourceColumn": "mercurio_total",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "bacterias_aerobias_mesofilas",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "4e04bae4-92c9-4061-bf0d-a70f2ead24fd",
+            "sourceColumn": "bacterias_aerobias_mesofilas",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "coliformes_totales",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "c8d11280-c70a-4ca7-b6e9-6882ba69afca",
+            "sourceColumn": "coliformes_totales",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "coliformes_fecales",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b06c94b3-fddd-40be-b902-6abf0f9487bd",
+            "sourceColumn": "coliformes_fecales",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "coliformes_no_fecales_35c",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5734df25-4b12-4570-8ccc-4b8c68712da2",
+            "sourceColumn": "coliformes_no_fecales_35c",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "escherichia_coli",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "07f4de45-ae34-46ac-ab64-bca76d4379e6",
+            "sourceColumn": "escherichia_coli",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "pseudomonas_aeruginosa",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "727bc3ab-9bd8-4c91-9218-cc642a2bd401",
+            "sourceColumn": "pseudomonas_aeruginosa",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "estreptococos_fecales",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "926c43e3-dc1a-4894-bc3c-94525879a630",
+            "sourceColumn": "estreptococos_fecales",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "enterococos",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "071bdae0-8958-41e6-aa09-12595ff7276f",
+            "sourceColumn": "enterococos",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "b7196320-a92c-49c6-85db-458849f0ee57",
+        "partitions": [
+          {
+            "name": "apra_merged_data",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = Csv.Document(Web.Contents(merged_data),[Delimiter=\",\", Columns=57, Encoding=65001, QuoteStyle=QuoteStyle.None]),",
+                "    #\"Promoted Headers\" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    #\"Changed Type\" = Table.TransformColumnTypes(#\"Promoted Headers\",{{\"fecha_muestra\", type date}, {\"dataset\", type text}, {\"aspecto\", type text}, {\"ph_a_25_c\", Int64.Type}, {\"conductividad_a_25c\", Int64.Type}, {\"temperatura\", Int64.Type}, {\"oxigeno\", Int64.Type}, {\"turbidez\", Int64.Type}, {\"nitritos\", Int64.Type}, {\"nitrogeno_amoniacal\", Int64.Type}, {\"nitratos\", type text}, {\"solidos_totales\", Int64.Type}, {\"solidos_fijos\", Int64.Type}, {\"solidos_volátiles\", Int64.Type}, {\"dureza\", Int64.Type}, {\"alcalinidad_total\", Int64.Type}, {\"cloruros\", Int64.Type}, {\"salinidad\", type text}, {\"solidos_disueltos_totales\", type text}, {\"solidos_sedimentables_1_hs\", type text}, {\"solidos_suspendidos\", type text}, {\"dqo\", type text}, {\"dbo5\", type text}, {\"fosforo_total\", Int64.Type}, {\"detergentes\", type text}, {\"sulfuros\", type text}, {\"sulfatos\", Int64.Type}, {\"sustancias_fenolicas\", type text}, {\"aluminio\", type text}, {\"benceno\", Int64.Type}, {\"tolueno\", Int64.Type}, {\"etil-benceno\", Int64.Type}, {\"m_p-xileno\", Int64.Type}, {\"o-xileno\", Int64.Type}, {\"hidrocarburos_totales\", type text}, {\"aceites_y_grasas\", type text}, {\"de_sat_de_od\", Int64.Type}, {\"niquel_total\", type text}, {\"cobre_total\", type text}, {\"zinc_total\", type text}, {\"hierro_total\", Int64.Type}, {\"manganeso_total\", Int64.Type}, {\"cobalto_total\", type text}, {\"cromo_total\", type text}, {\"arsenico_total\", type text}, {\"plomo_total\", type text}, {\"cadmio_total\", type text}, {\"plata_total\", type text}, {\"mercurio_total\", type text}, {\"bacterias_aerobias_mesofilas\", type text}, {\"coliformes_totales\", type text}, {\"coliformes_fecales\", type text}, {\"coliformes_no_fecales_35c\", type text}, {\"escherichia_coli\", type text}, {\"pseudomonas_aeruginosa\", type text}, {\"estreptococos_fecales\", type text}, {\"enterococos\", type text}})",
+                "in",
+                "    #\"Changed Type\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_2e4879b3-fbc4-4556-b7d0-401b17a4bb9a",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "c7b8a09c-a5bf-4d48-ab82-bb7841e1c9b9",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isHidden": true,
+            "lineageTag": "a823a671-1d7d-4f46-8a9b-274fccee0fee",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isHidden": true,
+            "lineageTag": "0cb06df6-a52f-4bb7-b28a-f364878564c4",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "a2ab6412-b3a1-42ad-a96a-5308eee00757",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isHidden": true,
+            "lineageTag": "3db81dfb-c654-4d6d-9a81-2f656e24e9de",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "1fcf5704-76dd-41a0-9ff4-57e9ab72be63",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isHidden": true,
+            "lineageTag": "d74c49f2-55ce-42e6-a931-9c03916bfe79",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "6fb44320-a96f-46fa-b973-96da6d7072fb",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "83ef8f51-b19d-4f72-818c-40e7c3aacc37",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "d08e68cd-70f4-4b43-9614-beee0a89d957",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "85ed82d6-6ca5-476f-aeef-551268b323ac",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "321766fe-5197-447d-ab0e-a372b62951a4"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "f9387074-e0a5-46cd-bd6b-5b133b07e61f",
+        "partitions": [
+          {
+            "name": "LocalDateTable_2e4879b3-fbc4-4556-b7d0-401b17a4bb9a",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('apra_merged_data'[fecha_muestra])), 1, 1), Date(Year(MAX('apra_merged_data'[fecha_muestra])), 12, 31))",
               "type": "calculated"
             }
           }
