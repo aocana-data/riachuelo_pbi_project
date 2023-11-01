@@ -1,0 +1,2085 @@
+{
+  "compatibilityLevel": 1567,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Sheet1\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBIDesktopVersion",
+        "value": "2.122.746.0 (23.10)"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "cultures": [
+      {
+        "name": "en-US",
+        "linguisticMetadata": {
+          "content": {
+            "DynamicImprovement": "HighConfidence",
+            "Language": "en-US",
+            "Version": "1.0.0"
+          },
+          "contentType": "json"
+        }
+      }
+    ],
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "07d96e4d-2789-4067-aeb7-7f93645d35f0",
+        "fromColumn": "Fecha",
+        "fromTable": "Sheet1",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_67851dff-1aaa-4f23-9318-50397d1e1ddc"
+      },
+      {
+        "name": "3d7e2e20-2bb5-4847-9184-09f120aa2fca",
+        "fromColumn": "Date",
+        "fromTable": "Calendario",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_f206bbdb-19bb-4112-a6db-47ca132f3787"
+      }
+    ],
+    "sourceQueryCulture": "es-AR",
+    "tables": [
+      {
+        "name": "DateTableTemplate_5a45ca48-0e9d-41a7-8b42-16d2765a2731",
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "5f8e3c51-49f5-427c-8d4c-c8190fa546ab",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "a3d9a30e-3471-4eb9-b802-6fd27a69a91f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "24c51c56-fa91-4286-b90a-398b5d92417b",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "1b835d97-c45d-41f0-987c-59d4a3f8a41b",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "b953e277-873d-4c98-87ef-4af48a693e72",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "e60cef98-5328-43d4-b446-4af67788b494",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "1cd24297-8451-449b-b2cb-4dd3f033f92d",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "36457156-abd3-4b5d-a3ab-c1c48076c7c2",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "08129f62-7aad-4870-a23a-350d0ddb1c4b",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "1a8c5db2-0d58-49fd-9f47-24814a8164cf",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "6774cdd6-fc4f-470b-a053-0b22057320d2",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "1b5c8231-ae9f-4f64-967e-6c40bffad7b4"
+          }
+        ],
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "0e605215-654f-4ae6-94e2-8a6d3cf7f94a",
+        "partitions": [
+          {
+            "name": "DateTableTemplate_5a45ca48-0e9d-41a7-8b42-16d2765a2731-3f299669-cf91-4d2a-9858-dd662f8ddd48",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Sheet1",
+        "annotations": [
+          {
+            "name": "PBI_ResultType",
+            "value": "Table"
+          },
+          {
+            "name": "PBI_NavigationStepName",
+            "value": "Navegación"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Determinación",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "b343b38c-4fe0-4770-b43d-357571aec497",
+            "sourceColumn": "Determinación",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Puente La Noria",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "579462e6-9b69-4fa3-a1f2-a651c3313fa7",
+            "sourceColumn": "Puente La Noria",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Puente Alsina",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "6191a4ec-5949-4e91-bd0e-71169863ee09",
+            "sourceColumn": "Puente Alsina",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Desembocadura",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "dataType": "double",
+            "lineageTag": "a8e6b1e7-5d80-464e-b958-c0a377710e4e",
+            "sourceColumn": "Desembocadura",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Fecha",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              },
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              },
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isDateTimeCustom\":true}"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "d/m/yyyy",
+            "lineageTag": "f429dc5c-e202-4ca1-8a3f-5d248a6c4ef6",
+            "sourceColumn": "Fecha",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Variation",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_67851dff-1aaa-4f23-9318-50397d1e1ddc"
+                },
+                "isDefault": true,
+                "relationship": "07d96e4d-2789-4067-aeb7-7f93645d35f0"
+              }
+            ]
+          },
+          {
+            "name": "Nombre del mes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "changedProperties": [
+              {
+                "property": "SortByColumn"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "d9430ce7-435c-477a-aca8-3041ca65b009",
+            "sortByColumn": "Número del mes",
+            "sourceColumn": "Nombre del mes",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Número del mes",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "9f05ae12-1014-4288-a9f4-21c3b0aabc83",
+            "sourceColumn": "Número del mes",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "Año",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "lineageTag": "00773821-f2e9-49e4-a6c4-7d1e0fb64efa",
+            "sourceColumn": "Año",
+            "summarizeBy": "sum"
+          },
+          {
+            "name": "determinación_rec",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "SWITCH(Sheet1[Determinación],",
+              "",
+              "    \"alcalinidad total (mg/l caco3)\" , \"alcalinidad total (mg/l CaCO3)\",",
+              "        \"arsénico total (μg/l)\" , \"arsénico total (Qg/l)\",",
+              "            \"conductividad a 25°c (μs/cm)\", \"conductividad a 25°c (Qs/cm)\",",
+              "                \"dureza (mg/l caco3)\", \"dureza (mg/l CaCO3)\",",
+              "                    \"fósforo total (μg/l)\",\"fósforo total (Qg/l)\",",
+              "                        \"hierro total (mg/l)\" , \"hierro total (mg/l)\",",
+              "                            \"nitrógeno amoniacal (mg/l)\", \"nitrógeno amoniacal (mg/l)\",",
+              "                                \"oxígeno disuelto (mg/l)\" ,\"oxígeno disuelto (mg/l)\",",
+              "                                    \"ph\" , \"ph (pH)\",",
+              "                                        \"salinidad (%)\",\"salinidad (%)\",",
+              "                                            \"sólidos disueltos totales (mg/l nacl)\", \"sólidos disueltos totales (mg/l NaCL)\",",
+              "                                                \"sólidos fijos (mg/l)\", \"sólidos fijos (mg/l)\",",
+              "                                                    \"sólidos totales (103-105° c mg/l)\",\"sólidos totales (103-105° c mg/l)\",",
+              "                                                        \"sólidos volátiles (mg/l)\", \"sólidos volátiles (mg/l)\",",
+              "                                                            \"sulfatos (mg/l)\" , \"sulfatos (mg/l)\",",
+              "                                                                \"temperatura (°C)\" , \"temperatura (°C)\",",
+              "                                                                    \"turbidez (NTU)\" , \"turbidez (NTU)\"",
+              ")",
+              "",
+              ""
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "c3c2663f-16d8-45cc-aa69-86dc83d75618",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "unidad_rec",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": [
+              "SWITCH(Sheet1[Unidad],",
+              " \"%\",\"%\",",
+              "    \"°C\",\"°C\",",
+              "        \"103-105° c mg/l\", \"103-105° c mg/l\",",
+              "            \"mg/l\",\"mg/l\",",
+              "                \"mg/l caco3\",\"mg/l CaCO3\",",
+              "                    \"mg/l nacl\", \"mg/l NaCL\",",
+              "                    \"ntu\",\"NTU\",",
+              "                        \"pH\",\"pH\",",
+              "                            \"μg/l\",\"Qg/l\",",
+              "                                \"μs/cm\",\"Qs/cm\"",
+              ")",
+              ""
+            ],
+            "isDataTypeInferred": true,
+            "lineageTag": "2b7168dc-8a55-4cb4-b2b0-003334185f5e",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Unidad",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "5a9cbf75-0b11-4507-99fc-20f699a11cc6",
+            "sourceColumn": "Unidad",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Trimestre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "9b03357e-1e19-43ee-8eba-bb0841f2fd23",
+            "sourceColumn": "Trimestre",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "trimestre_prueba",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "\"Trimestre \" & FORMAT(Sheet1[Fecha],\"Q\") ",
+            "isDataTypeInferred": true,
+            "lineageTag": "73b4f906-03e9-40b0-959c-180f6cd6f83f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "lineageTag": "5fb0c8a6-c7ce-4e2c-9c87-8efdc9180c4d",
+        "measures": [
+          {
+            "name": "Unidad Seleccionada",
+            "expression": [
+              "",
+              "    IF(",
+              "        ISFILTERED(Sheet1[Determinación]),",
+              "        SELECTEDVALUE(Sheet1[Unidad]),",
+              "        BLANK()",
+              "    )",
+              ""
+            ],
+            "lineageTag": "eaf40f21-35f0-40b5-8e88-ab77a5fd77b1"
+          },
+          {
+            "name": "maximo_prueba",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "MAXX(",
+              "    VALUES(Sheet1[Trimestre]),  -- Itera por cada cuatrimestre",
+              "    CALCULATE(",
+              "        MAX(Sheet1[Puente La Noria]),  -- Obtiene el máximo de ventas",
+              "        FILTER(",
+              "            Sheet1,",
+              "            Sheet1[Fecha] >= MIN(Sheet1[Fecha]) && Sheet1[Fecha] <= MAX(Sheet1[Fecha])",
+              "        )",
+              "    )",
+              ")"
+            ],
+            "lineageTag": "e1c6ab57-a658-4c75-b3b4-5fcc90a4e7c7"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Sheet1-21181416-7565-4356-ad25-b0a6114fd984",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Source = GoogleSheets.Contents(\"https://docs.google.com/spreadsheets/d/1vWTgqlgh7L6woWVafLtK59JAvRuDZImrZnlY-cHtkCs/\"),",
+                "    Sheet1_Table = Source{[name=\"Sheet1\",ItemKind=\"Table\"]}[Data],",
+                "    #\"Encabezados promovidos\" = Table.PromoteHeaders(Sheet1_Table, [PromoteAllScalars=true]),",
+                "    #\"Tipo cambiado\" = Table.TransformColumnTypes(#\"Encabezados promovidos\",{{\"Determinación\", type text}, {\"Puente La Noria\", type number}, {\"Puente Alsina\", type number}, {\"Desembocadura\", type number}, {\"Fecha\", type date}}),",
+                "    #\"Mes insertado\" = Table.AddColumn(#\"Tipo cambiado\", \"Mes\", each Date.Month([Fecha]), Int64.Type),",
+                "    #\"Columnas con nombre cambiado\" = Table.RenameColumns(#\"Mes insertado\",{{\"Mes\", \"Número del mes\"}}),",
+                "    #\"Nombre del mes insertado\" = Table.AddColumn(#\"Columnas con nombre cambiado\", \"Nombre del mes\", each Date.MonthName([Fecha]), type text),",
+                "    #\"Año insertado\" = Table.AddColumn(#\"Nombre del mes insertado\", \"Año\", each Date.Year([Fecha]), Int64.Type),",
+                "    #\"Texto insertado después del delimitador\" = Table.AddColumn(#\"Año insertado\", \"Texto después del delimitador\", each Text.AfterDelimiter([Determinación], \"(\"), type text),",
+                "    #\"Columnas con nombre cambiado1\" = Table.RenameColumns(#\"Texto insertado después del delimitador\",{{\"Texto después del delimitador\", \"Unidad\"}}),",
+                "    Personalizado1 = Table.ReplaceValue(#\"Texto insertado después del delimitador\",\"\",\"ph\",Replacer.ReplaceValue,{\"Texto después del delimitador\"}),",
+                "    #\"Columnas reordenadas1\" = Table.ReorderColumns(Personalizado1,{\"Determinación\", \"Texto después del delimitador\", \"Puente La Noria\", \"Puente Alsina\", \"Desembocadura\", \"Fecha\", \"Número del mes\", \"Nombre del mes\", \"Año\"}),",
+                "    #\"Columnas con nombre cambiado2\" = Table.RenameColumns(#\"Columnas reordenadas1\",{{\"Texto después del delimitador\", \"Unidad\"}}),",
+                "    #\"Valor reemplazado\" = Table.ReplaceValue(#\"Columnas con nombre cambiado2\",\")\",\"\",Replacer.ReplaceText,{\"Unidad\"}),",
+                "    #\"Tipo cambiado con configuración regional\" = Table.TransformColumnTypes(#\"Valor reemplazado\", {{\"Fecha\", type date}}, \"es-AR\"),",
+                "    #\"Trimestre insertado\" = Table.AddColumn(#\"Tipo cambiado con configuración regional\", \"Trimestre\", each Date.QuarterOfYear([Fecha]), Int64.Type),",
+                "    #\"Tipo cambiado1\" = Table.TransformColumnTypes(#\"Trimestre insertado\",{{\"Trimestre\", type text}}),",
+                "    #\"Valor reemplazado1\" = Table.ReplaceValue(#\"Tipo cambiado1\",\"4\",\"Cuarto Trimestre\",Replacer.ReplaceText,{\"Trimestre\"}),",
+                "    #\"Valor reemplazado2\" = Table.ReplaceValue(#\"Valor reemplazado1\",\"1\",\"Primer Trimestre\",Replacer.ReplaceText,{\"Trimestre\"}),",
+                "    #\"Valor reemplazado3\" = Table.ReplaceValue(#\"Valor reemplazado2\",\"2\",\"Segundo Trimestre\",Replacer.ReplaceText,{\"Trimestre\"}),",
+                "    #\"Valor reemplazado4\" = Table.ReplaceValue(#\"Valor reemplazado3\",\"3\",\"Tercer Trimestre\",Replacer.ReplaceText,{\"Trimestre\"}),",
+                "    #\"Valor reemplazado5\" = Table.ReplaceValue(#\"Valor reemplazado4\",\"Cuarto Trimestre\",\"T4\",Replacer.ReplaceText,{\"Trimestre\"}),",
+                "    #\"Valor reemplazado6\" = Table.ReplaceValue(#\"Valor reemplazado5\",\"Primer Trimestre\",\"1T\",Replacer.ReplaceText,{\"Trimestre\"}),",
+                "    #\"Valor reemplazado7\" = Table.ReplaceValue(#\"Valor reemplazado6\",\"Segundo Trimestre\",\"2T\",Replacer.ReplaceText,{\"Trimestre\"}),",
+                "    #\"Valor reemplazado8\" = Table.ReplaceValue(#\"Valor reemplazado7\",\"Tercer Trimestre\",\"3T\",Replacer.ReplaceText,{\"Trimestre\"}),",
+                "    #\"Nombre del mes insertado1\" = Table.AddColumn(#\"Valor reemplazado8\", \"Nombre del mes.1\", each Date.MonthName([Fecha]), type text),",
+                "    #\"Columnas quitadas\" = Table.RemoveColumns(#\"Nombre del mes insertado1\",{\"Nombre del mes.1\"}),",
+                "    #\"Valor reemplazado9\" = Table.ReplaceValue(#\"Columnas quitadas\",\"T4\",\"4T\",Replacer.ReplaceText,{\"Trimestre\"})",
+                "in",
+                "    #\"Valor reemplazado9\""
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_67851dff-1aaa-4f23-9318-50397d1e1ddc",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "f8c8fe86-a93f-4fde-b0e9-b550599b71f6",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "d61595f4-05df-469c-ade5-23e665abab57",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "e6ff70a0-9ffb-4b0e-bea8-a146217efe98",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "7eab6bcd-a3d1-4c07-97f3-b25b54c646b0",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "7298fe91-8e35-4271-8447-272f16b00278",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "e04eafac-a476-4e9a-9d30-d191928e974c",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "c64a5b47-742b-4046-a9be-2214d36b987c",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "0c254a54-332a-490c-b1f0-0e7b7da713ac",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "d8e41d94-e711-4517-a078-76c759d8dddc",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "56d08780-804c-4cad-bdb8-d5a20df2b0f9",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "ef1b1196-2731-46d0-aee7-53b5822c9b73",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "719df3a2-3d04-4cc2-97ea-09f800575ebb"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "d3583c8b-8c91-471d-acae-129e7098f944",
+        "partitions": [
+          {
+            "name": "LocalDateTable_67851dff-1aaa-4f23-9318-50397d1e1ddc-b81f2208-4d71-4c58-855f-d1aa1fd528e3",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('Sheet1'[Fecha])), 1, 1), Date(Year(MAX('Sheet1'[Fecha])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      },
+      {
+        "name": "medidas_calculadas_desembocadura",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "9a37ea5e2a86474889fac82137623d3a"
+          },
+          {
+            "name": "436ba87b-9c83-4389-a31b-ebd06a36be98",
+            "value": "{\"Expression\":\"\"}"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Column",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "d41cb723-93e4-44b5-aa24-a43bfd6353cc",
+            "sourceColumn": "[Column]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "de3855b3-2113-470b-836d-97c5091c84b5",
+        "measures": [
+          {
+            "name": "ph_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"ph (pH)\" && MAX(Sheet1[Desembocadura]) > 6.5",
+              ", 6.5, \"-\")"
+            ],
+            "lineageTag": "c08b8104-1065-47a2-9dc4-244403dc9d2b"
+          },
+          {
+            "name": "ph_usoiv",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"ph (pH)\" && MAX(Sheet1[Desembocadura]) > 6   ",
+              ", 6, \"-\")"
+            ],
+            "lineageTag": "d9364ea0-5868-499d-b24c-19e0c13939eb"
+          },
+          {
+            "name": "oxigeno_usoiv",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"oxígeno disuelto (mg/l)\" && MAX(Sheet1[Desembocadura]) > 4",
+              ", 4, \"-\")"
+            ],
+            "lineageTag": "e2f34251-0e96-4e4d-9c03-788750518d7d"
+          },
+          {
+            "name": "oxigeno_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"oxígeno disuelto (mg/l)\" && MAX(Sheet1[Desembocadura]) > 2",
+              ", 2, \"-\")"
+            ],
+            "lineageTag": "8b1b589b-74f8-448d-a0ab-13265e6be358"
+          },
+          {
+            "name": "fosforo_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if(SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"fósforo total (Qg/l)\" && MAX(Sheet1[Desembocadura]) < 5000",
+              ", 5000, \"-\") "
+            ],
+            "lineageTag": "b714080e-61a8-49a3-a958-d4db3a3c46f2"
+          },
+          {
+            "name": "conductividad_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "IF(SELECTEDVALUE(Sheet1[determinación_rec],-1) =\"conductividad a 25°c (Qs/cm)\" && MAX(Sheet1[Desembocadura]) < 2250,2250,\"-\")",
+            "lineageTag": "65931120-3517-46a7-b005-f45c088c452d"
+          },
+          {
+            "name": "arsenico_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"arsénico total (Qg/l)\" && MAX(Sheet1[Desembocadura]) <=50",
+              ", 50, \"-\")  "
+            ],
+            "lineageTag": "83a4af06-2868-496b-9e4e-baf697744b4c"
+          },
+          {
+            "name": "hierro_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"hierro total (mg/l)\" && MAX(Sheet1[Desembocadura]) > 5",
+              ",5, \"-\")"
+            ],
+            "lineageTag": "88eac5c2-a00e-4254-b59a-945f19bfc50d"
+          },
+          {
+            "name": "nitrogeno_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"nitrógeno amoniacal (mg/l)\" && MAX(Sheet1[Desembocadura]) > 2.5",
+              ", 2.5, \"-\") "
+            ],
+            "lineageTag": "21cb7016-dde7-4d80-bb86-335b6a7c2762"
+          },
+          {
+            "name": "solidos_disueltos_totales_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"sólidos disueltos totales (mg/l NaCL)\" && MAX(Sheet1[Desembocadura]) <= 1500",
+              ", 1500, \"-\") ",
+              ""
+            ],
+            "lineageTag": "63baabe4-9e06-41e2-890e-17a5abf616f6"
+          },
+          {
+            "name": "temperatura_insitu",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"temperatura (°C)\" && MAX(Sheet1[Desembocadura]) < 35",
+              ", 35, \"-\")  "
+            ],
+            "lineageTag": "3015ee90-c22c-49e4-94f7-ab0be31f872c"
+          },
+          {
+            "name": "turbidez_usoiii",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"turbidez (NTU)\" && MAX(Sheet1[Desembocadura]) <= 100 , 100, \"-\") ",
+            "lineageTag": "538b0a0a-3b14-42c2-a1c2-3c7d2e51e40b"
+          },
+          {
+            "name": "Desembocadura máx. por Quarter",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosTrimestrales =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Quarter],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Trimestral\", AVERAGE('Sheet1'[Desembocadura])",
+              "    )",
+              "RETURN",
+              "    MAXX(",
+              "        PromediosTrimestrales,",
+              "        [Promedio Trimestral]",
+              "    )"
+            ],
+            "lineageTag": "357d2ae6-81ec-4f86-a5e8-9365a123e61c"
+          },
+          {
+            "name": "Desembocadura min. por Quarter",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosTrimestrales =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Quarter],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Trimestral\", AVERAGE('Sheet1'[Desembocadura])",
+              "    )",
+              "RETURN",
+              "    MINX(",
+              "        PromediosTrimestrales,",
+              "        [Promedio Trimestral]",
+              "    )"
+            ],
+            "lineageTag": "febf6e9c-becd-46a7-a5e4-b7f59d3e2c2b"
+          },
+          {
+            "name": "Desembocadura máx. por mes",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosMensual =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Month],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Mensual\", AVERAGE('Sheet1'[Desembocadura])",
+              "    )",
+              "RETURN",
+              "    MAXX(",
+              "        PromediosMensual,",
+              "        [Promedio Mensual]",
+              "    )"
+            ],
+            "lineageTag": "039d941d-bc36-4758-83bf-b46738aac545"
+          },
+          {
+            "name": "DE_desembocadura",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "STDEV.P(Sheet1[Desembocadura])",
+            "lineageTag": "efc152ba-6672-4339-b080-ce4bbb45d9cc"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "medidas_calculadas_desembocadura",
+            "mode": "import",
+            "source": {
+              "expression": "Row(\"Column\", BLANK())",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "medidas_calculadas_puente_alsina",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "497bfcade25a424aa73b2366b7a202b7"
+          },
+          {
+            "name": "436ba87b-9c83-4389-a31b-ebd06a36be98",
+            "value": "{\"Expression\":\"\"}"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Column",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "fb189a5e-352c-4ceb-82be-5c308535fc0c",
+            "sourceColumn": "[Column]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "456f4b5d-2629-4052-a4ff-f0c163002cfe",
+        "measures": [
+          {
+            "name": "arsenico_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"arsénico total (Qg/l)\" && MAX(Sheet1[Puente Alsina]) <=50",
+              ", 50, \"-\") "
+            ],
+            "lineageTag": "71ff3c43-4772-47da-ad92-8ffcf6916f05"
+          },
+          {
+            "name": "conductividad_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "IF(SELECTEDVALUE(Sheet1[determinación_rec],-1) =\"conductividad a 25°c (Qs/cm)\" && MAX(Sheet1[Puente Alsina]) >= 2250,2250,\"-\")",
+            "lineageTag": "ace23b2f-d7df-4f13-a146-8a4f02049caf"
+          },
+          {
+            "name": "fosforo_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if(SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"fósforo total (Qg/l)\" && MAX(Sheet1[Puente Alsina]) <= 5000",
+              ", 5000, \"-\") "
+            ],
+            "lineageTag": "621da235-aaa8-4a64-91b9-9bbf24fbe245"
+          },
+          {
+            "name": "hierro_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"hierro total (mg/l)\" && MAX(Sheet1[Puente Alsina]) > 5",
+              ",5, \"-\")"
+            ],
+            "lineageTag": "84b96811-aea7-4f2f-8fde-d3fca7e6349a"
+          },
+          {
+            "name": "nitrogeno_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"nitrógeno amoniacal (mg/l)\" && MAX(Sheet1[Puente Alsina]) >= 2.5",
+              ", 2.5, \"-\") "
+            ],
+            "lineageTag": "e521a2b2-611d-4c9e-a585-f247355a63ce"
+          },
+          {
+            "name": "oxigeno_usovi_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"oxígeno disuelto (mg/l)\" && MAX(Sheet1[Puente Alsina]) > 2",
+              ", 2, \"-\")"
+            ],
+            "lineageTag": "eb1cf91e-f7c1-4105-be19-7823ab9e5f7e"
+          },
+          {
+            "name": "oxigeno_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"oxígeno disuelto (mg/l)\" && MAX(Sheet1[Desembocadura]) > 4",
+              ", 4, \"-\")"
+            ],
+            "lineageTag": "69832fba-2e62-465c-968c-71042f591d6e"
+          },
+          {
+            "name": "ph_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"ph (pH)\" && MAX(Sheet1[Puente Alsina]) > 6.5",
+              ", 6.5, \"-\")"
+            ],
+            "lineageTag": "b1086d21-be59-4dd1-ae61-701b09a64f42"
+          },
+          {
+            "name": "ph_usoiv_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"ph (pH)\" && MAX(Sheet1[Puente Alsina]) > 6   ",
+              ", 6, \"-\")"
+            ],
+            "lineageTag": "7f0e731b-f249-4f7f-adab-416f7905f103"
+          },
+          {
+            "name": "solidos_disueltos_totales_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"sólidos disueltos totales (mg/l NaCL)\" && MAX(Sheet1[Puente Alsina]) >= 1500",
+              ", 1500, \"-\") "
+            ],
+            "lineageTag": "01a31e87-6c92-4700-bcf4-859fb2bc407c"
+          },
+          {
+            "name": "temperatura_insitu_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"temperatura (°C)\" && MAX(Sheet1[Puente Alsina]) < 35",
+              ", 35, \"-\") "
+            ],
+            "lineageTag": "aedf9d86-6d9b-496f-9513-ae5c293f2f91"
+          },
+          {
+            "name": "turbidez_usoiii_alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"turbidez (NTU)\" && MAX(Sheet1[Puente Alsina]) >= 100 , 100, \"-\") ",
+            "lineageTag": "542cc4d5-4fae-4216-a183-c1ca77b1d607"
+          },
+          {
+            "name": "Puente Alsina máx. por Quarter",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosTrimestrales =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Quarter],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Trimestral\", AVERAGE('Sheet1'[Puente Alsina])",
+              "    )",
+              "RETURN",
+              "    MAXX(",
+              "        PromediosTrimestrales,",
+              "        [Promedio Trimestral]",
+              "    )"
+            ],
+            "lineageTag": "880d4077-12e8-49fa-a024-1b6a1d4dd43c"
+          },
+          {
+            "name": "Puente Alsina min. por Quarter",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosTrimestrales =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Quarter],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Trimestral\", AVERAGE('Sheet1'[Puente Alsina])",
+              "    )",
+              "RETURN",
+              "    minx(",
+              "        PromediosTrimestrales,",
+              "        [Promedio Trimestral]",
+              "    )"
+            ],
+            "lineageTag": "03d5de8e-65bd-4715-9c08-97fa949a08a0"
+          },
+          {
+            "name": "Puente Alsina máx. por Mes",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosMensual =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Month],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Mensual\", AVERAGE('Sheet1'[Puente Alsina])",
+              "    )",
+              "RETURN",
+              "    MAXX(",
+              "        PromediosMensual,",
+              "        [Promedio Mensual]",
+              "    )"
+            ],
+            "lineageTag": "90294554-f70e-414d-a876-d838ed1afa8f"
+          },
+          {
+            "name": "Puente Alsina min. por Mes",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosMensual =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Month],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Mensual\", AVERAGE('Sheet1'[Puente Alsina])",
+              "    )",
+              "RETURN",
+              "    MINX(",
+              "        PromediosMensual,",
+              "        [Promedio Mensual]",
+              "    )"
+            ],
+            "lineageTag": "c18be0bf-74f6-40d6-97ae-cead91bd8b96"
+          },
+          {
+            "name": "DE_Alsina",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "STDEV.P(Sheet1[Puente Alsina])",
+            "lineageTag": "cb38fe4e-9b4c-4951-9217-9f60cef1fc92"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "medidas_calculadas_puente_alsina",
+            "mode": "import",
+            "source": {
+              "expression": "Row(\"Column\", BLANK())",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "medidas_calculadas_LaNoria",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "e9e1b29435fd4046b8f1350f4d3870b1"
+          },
+          {
+            "name": "436ba87b-9c83-4389-a31b-ebd06a36be98",
+            "value": "{\"Expression\":\"\"}"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Column",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "b5db8e2f-b57a-4b4c-9d14-fc1084bb9a28",
+            "sourceColumn": "[Column]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "04692b91-8387-4fc2-8154-4b4365ec66ac",
+        "measures": [
+          {
+            "name": "arsenico_usoiii_PL",
+            "expression": "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"arsénico total (Qg/l)\" && MAX(Sheet1[Puente La Noria]) <=50,50,\"-\")",
+            "formatString": "0",
+            "lineageTag": "1b4283cf-7577-4952-9080-c801efc324f9"
+          },
+          {
+            "name": "conductividad_usoiii_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "IF(SELECTEDVALUE(Sheet1[determinación_rec],-1) =\"conductividad a 25°c (Qs/cm)\" && MAX(Sheet1[Puente La Noria]) >= 2250,2250,\"-\")",
+            "lineageTag": "b2e80342-03ae-4dd7-aecf-1bafe4d26ab6"
+          },
+          {
+            "name": "fosforo_usoiii_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if(SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"fósforo total (Qg/l)\" && MAX(Sheet1[Puente La Noria]) < 5000",
+              ", 5000, \"-\") "
+            ],
+            "lineageTag": "143517c0-7e20-418d-88b8-c2e07789b658"
+          },
+          {
+            "name": "hierro_usoiii_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"hierro total (mg/l)\" && MAX(Sheet1[Puente La Noria]) < 5",
+              ",5, \"-\")"
+            ],
+            "lineageTag": "a34e4cc6-d765-49a5-b7f9-c48a381b1912"
+          },
+          {
+            "name": "nitrogeno_usoiii_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"nitrógeno amoniacal (mg/l)\" && MAX(Sheet1[Puente La Noria]) > 2.5",
+              ", 2.5, \"-\") "
+            ],
+            "lineageTag": "c7b0c6a7-2fa5-4ecc-907b-6527e360bf98"
+          },
+          {
+            "name": "oxigeno_usoiii_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"oxígeno disuelto (mg/l)\" && MAX(Sheet1[Puente La Noria]) > 2",
+              ", 2, \"-\")"
+            ],
+            "lineageTag": "b35b6a42-c194-44f7-900c-66d69e95cc31"
+          },
+          {
+            "name": "oxigeno_usoiv_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"oxígeno disuelto (mg/l)\" && MAX(Sheet1[Puente La Noria]) > 4",
+              ", 4, \"-\")"
+            ],
+            "lineageTag": "a69d7a86-023d-468a-9a4d-14a9cbe55586"
+          },
+          {
+            "name": "ph_usoiii_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"ph (pH)\" && MAX(Sheet1[Puente La Noria]) > 6.5",
+              ", 6.5, \"-\")"
+            ],
+            "lineageTag": "d9827b14-b376-455b-b6d4-ddab6e78fd1e"
+          },
+          {
+            "name": "ph_usoiv_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"ph (pH)\" && MAX(Sheet1[Puente La Noria]) > 6   ",
+              ", 6, \"-\")"
+            ],
+            "lineageTag": "3d3a8330-e41d-4bf2-bda0-35af26f6d9fc"
+          },
+          {
+            "name": "solidos_disueltos_totales_usoiii_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"sólidos disueltos totales (mg/l NaCL)\" && MAX(Sheet1[Puente La Noria]) >= 1500",
+              ", 1500, \"-\") "
+            ],
+            "lineageTag": "76214885-d8b3-4d8f-9a5e-96212660fa7a"
+          },
+          {
+            "name": "temperatura_insitu_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"temperatura (°C)\" && MAX(Sheet1[Puente La Noria]) < 35",
+              ", 35, \"-\")"
+            ],
+            "lineageTag": "6239b83e-e884-4b1e-a46f-7c98d8ec7ff8"
+          },
+          {
+            "name": "turbidez_usoiii_LN",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"turbidez (NTU)\" && MAX(Sheet1[Puente La Noria]) >= 100 , 100, \"-\") ",
+            "lineageTag": "be477f84-2931-4e76-ab7b-a646cacc117c"
+          },
+          {
+            "name": "Puente La Noria min. por Quarter",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosTrimestrales =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Quarter],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Trimestral\", AVERAGE('Sheet1'[Puente La Noria])",
+              "    )",
+              "RETURN",
+              "    MINX(",
+              "        PromediosTrimestrales,",
+              "        [Promedio Trimestral]",
+              "    )"
+            ],
+            "lineageTag": "696b6d67-4686-4c1b-92b0-411e052fb20c"
+          },
+          {
+            "name": "Puente La Noria max. por mes",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosMensual =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Month],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Mensual\", AVERAGE('Sheet1'[Puente La Noria])",
+              "    )",
+              "RETURN",
+              "    MAXX(",
+              "        PromediosMensual,",
+              "        [Promedio Mensual]",
+              "    )"
+            ],
+            "lineageTag": "73015ac8-ba7f-46e7-9e27-254f544fae3a"
+          },
+          {
+            "name": "DE_lanoria",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "STDEV.P(Sheet1[Puente La Noria])",
+            "lineageTag": "5f4a965d-ce20-4e02-8e5a-1320b45105ab"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "medidas_calculadas_LaNoria",
+            "mode": "import",
+            "source": {
+              "expression": "Row(\"Column\", BLANK())",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "medidas_calculadas_comparativa",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "cef878eaf3334e5d995d4852cd9c4291"
+          },
+          {
+            "name": "436ba87b-9c83-4389-a31b-ebd06a36be98",
+            "value": "{\"Expression\":\"\"}"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Column",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "int64",
+            "formatString": "0",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "916d86cb-3382-4dfa-9316-1eebf6e38d04",
+            "sourceColumn": "[Column]",
+            "summarizeBy": "sum",
+            "type": "calculatedTableColumn"
+          }
+        ],
+        "lineageTag": "0990a656-a22e-4273-92aa-2dc26f611b9c",
+        "measures": [
+          {
+            "name": "arsenico_usoiii_compara",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"arsénico total (Qg/l)\" && MAX(Sheet1[Puente La Noria]) <=50,50,\"-\")",
+            "lineageTag": "9a3c8d17-e826-41fe-b2cd-b2d99078b6b0"
+          },
+          {
+            "name": "hierro_usoiii_compara",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "if (SELECTEDVALUE(Sheet1[determinación_rec], -1) = \"hierro total (mg/l)\" && MAX(Sheet1[Puente La Noria]) < 5",
+              ",5, \"-\")"
+            ],
+            "lineageTag": "e0ea437e-f075-422d-ba85-3d59506dc03c"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "medidas_calculadas_comparativa",
+            "mode": "import",
+            "source": {
+              "expression": "Row(\"Column\", BLANK())",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Calendario",
+        "annotations": [
+          {
+            "name": "PBI_Id",
+            "value": "3b28cd53d5b2401fa2ba469d4dad26c3"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isDataTypeInferred": true,
+            "isNameInferred": true,
+            "lineageTag": "f7862d0a-4bfd-4f23-935d-6c86aabd3d97",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn",
+            "variations": [
+              {
+                "name": "Variación",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_f206bbdb-19bb-4112-a6db-47ca132f3787"
+                },
+                "isDefault": true,
+                "relationship": "3d7e2e20-2bb5-4847-9184-09f120aa2fca"
+              }
+            ]
+          },
+          {
+            "name": "Cuatrimestre",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "expression": "IF(MONTH([Date]) <= 4, \"Cuatrimestre 1\", IF(MONTH([Date]) <= 8, \"Cuatrimestre 2\", \"Cuatrimestre 3\"))",
+            "isDataTypeInferred": true,
+            "lineageTag": "a481d19e-ef21-4d3e-b3e1-61dfc5f33fd3",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "lineageTag": "c17f76d3-4b58-4f5b-b212-dd920da4436a",
+        "measures": [
+          {
+            "name": "Puente La Noria máx. por Quarter",
+            "annotations": [
+              {
+                "name": "PBI_FormatHint",
+                "value": "{\"isGeneralNumber\":true}"
+              }
+            ],
+            "expression": [
+              "",
+              "VAR PromediosTrimestrales =",
+              "    SUMMARIZE(",
+              "        'Sheet1',",
+              "        'Sheet1'[Fecha].[Quarter],",
+              "          Sheet1[Fecha].[Year], -- Agrupar por trimestre",
+              "        \"Promedio Trimestral\", AVERAGE('Sheet1'[Puente La Noria])",
+              "    )",
+              "RETURN",
+              "    MAXX(",
+              "        PromediosTrimestrales,",
+              "        [Promedio Trimestral]",
+              "    )"
+            ],
+            "extendedProperties": [
+              {
+                "name": "MeasureTemplate",
+                "type": "json",
+                "value": {
+                  "daxTemplateName": "MaxPerCategory",
+                  "version": 0
+                }
+              }
+            ],
+            "lineageTag": "bdc176a3-4c37-4093-8c00-6994521bb801"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Calendario",
+            "mode": "import",
+            "source": {
+              "expression": "CALENDAR(MIN(Sheet1[Fecha]), MAX(Sheet1[Fecha]))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_f206bbdb-19bb-4112-a6db-47ca132f3787",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "7eded923-f492-4b96-937e-1f257a542cec",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "0b5c8705-2323-4d46-b6aa-31669e85c791",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "126f5042-6f55-4b39-a358-f792bacb850f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "0071c74b-7497-4e6c-b67f-7ce971bf9808",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "6cdb85dc-148a-4d3e-856e-72c541ffabfe",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "2eabcd59-b63c-4f7c-87c8-69f42c83dee1",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "isDataTypeInferred": true,
+            "isHidden": true,
+            "lineageTag": "faebbdd0-50fd-4777-8e72-47d4cc82545c",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "892e0a9a-5367-485d-b31c-0004d732cc5a",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "b8fe94d8-8f8d-454c-a87c-89bf50d0382f",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "9eb164d1-da8a-432c-a428-e7c8a08263e3",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "770bc2a8-762c-4e20-97e7-913b311428ac",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "9a493b7e-33e4-424f-981d-ad69a70e821e"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "ff72c606-82c3-40fd-b723-59974e6bd10e",
+        "partitions": [
+          {
+            "name": "LocalDateTable_f206bbdb-19bb-4112-a6db-47ca132f3787",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('Calendario'[Date])), 1, 1), Date(Year(MAX('Calendario'[Date])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      }
+    ]
+  }
+}
